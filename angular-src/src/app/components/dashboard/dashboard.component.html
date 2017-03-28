@@ -1,0 +1,94 @@
+<link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/themes/omega/theme.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+
+<h2 class="page-header">Product Management</h2>
+<!--<div class="panel">
+<button type="button" class="btn btn-block" data-toggle="collapse" data-target="#addNewProduct"><span class="glyphicon glyphicon-plus"></span>Add new products</button>
+<div id="addNewProduct" class="collapse">
+<form class="well" (submit)="addProduct()">
+  <div class="form-group">
+    <label>Product Name</label>
+    <input type="text" [(ngModel)]="name" name="name" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Product Description</label>
+    <input type="text" [(ngModel)]="itemDescription" name="itemDescription" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Product Price</label>
+    <input type="number" [(ngModel)]="price" name="price" class="form-control" min=".01" step="0.01" >
+  </div>
+  <div class="form-group">
+    <label>In Inventory</label>
+    <input type="number" [(ngModel)]="inStock" name="inStock" class="form-control" min="0">
+  </div>
+  <input type="submit" class="btn btn-primary" value="Add Product">
+</form>
+</div>
+</div>
+
+
+<div class="product-list">
+    <table class="table" >
+        <thead>
+          <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Inventory</th>
+          
+          </tr>
+        </thead>
+    <tbody>
+   
+    <tr *ngFor="let product of products">
+        
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>${{product.price}}</td>
+            <td>{{product.inStock}} </td>
+            <td><input type="button"  (click)="deleteProduct(product._id)" value="Delete" class="btn btn-danger btn-xs"></td>   
+      </tr>
+    
+         </tbody>
+  </table>
+    
+</div>-->
+
+
+<p-dataTable [value]="products" selectionMode="single" [(selection)]="selectedProduct" (onRowSelect)="onRowSelect($event)"  [paginator]="true" rows="15" [responsive]="true">
+    <p-header>Products List</p-header>
+    <p-column field="name" header="Name" [sortable]="true"></p-column>
+    <p-column field="description" header="Description" [sortable]="true"></p-column>
+    <p-column field="price" header="Price" [sortable]="true"></p-column>
+    <p-column field="inStock" header="Quantity" [sortable]="true"></p-column>
+    <p-footer><div class="ui-helper-clearfix" style="width:100%"><button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button></div></p-footer>
+</p-dataTable>
+
+<p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="product">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="name">NAME</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="product.name" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="description">DESCRIPTION</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="description" [(ngModel)]="product.description" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="price">PRICE</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="price" [(ngModel)]="product.price" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="inStock">QUANTITY</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="inStock" [(ngModel)]="product.inStock" /></div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="delete(product._id)" label="Delete"></button>
+            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+        </div>
+    </p-footer>
+</p-dialog>

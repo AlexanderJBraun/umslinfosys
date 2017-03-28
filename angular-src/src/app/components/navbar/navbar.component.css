@@ -1,0 +1,14 @@
+.btn:hover{
+background-color: #ededed !important;
+color: #3c3c3c !important;
+border: 1px solid #fff !important;
+
+}
+
+/*NAVIGATION*/
+.navbar{
+    background-color: #222222 !important;
+    text-transform: uppercase;
+    font-family: 'PT Sans Narrow', Arial, sans-serif;
+    font-weight: 700;
+}
